@@ -1,0 +1,54 @@
+# Node
+node_modules/
+npm-debug.log*
+frontend/node_modules/
+backend/node_modules/
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+venv/
+env/
+
+# Build outputs (will be rebuilt)
+frontend/build/
+frontend/.pnp
+frontend/.pnp.js
+
+# Git
+.git/
+.gitignore
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+*.DS_Store
+Thumbs.db
+
+# Documentation
+DEPLOYMENT.md
+README.md
+ARCHITECTURE.md
+PRD.md
+
+# Logs
+*.log
+
+# Downloaded/processed media (not needed in image)
+downloaded_images/
+downloaded_videos/
+output_images/
+output_videos/
+
+# Docker
+docker-compose.yml
+Dockerfile
+.dockerignore
+

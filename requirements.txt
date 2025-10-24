@@ -1,0 +1,12 @@
+# Requirements for image and video processing scripts
+
+# For image processing (image.py)
+Pillow>=10.1.0
+
+# For video processing (video.py)
+# Note: ffmpeg and ffprobe must be installed separately
+# On macOS: brew install ffmpeg
+# On Ubuntu/Debian: sudo apt-get install ffmpeg
+# On Windows: Download from https://ffmpeg.org/download.html
+
+# No Python dependencies required for video.py as it uses system ffmpeg
