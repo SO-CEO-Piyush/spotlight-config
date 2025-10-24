@@ -18,18 +18,13 @@ RUN pip install --no-cache-dir -r requirements.txt
 COPY download.py image.py video.py ./
 
 # Copy and build frontend
-COPY frontend/package*.json ./frontend/
-WORKDIR /app/frontend
-RUN npm install
-COPY frontend/ ./
-RUN npm run build
+WORKDIR /app
+COPY frontend ./frontend
+RUN cd frontend && npm install && npm run build
 
 # Copy and setup backend
-WORKDIR /app
-COPY backend/package*.json ./backend/
-WORKDIR /app/backend
-RUN npm install
-COPY backend/ ./
+COPY backend ./backend
+RUN cd backend && npm install --production
 
 # Create necessary directories
 WORKDIR /app
