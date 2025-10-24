@@ -1,3 +1,7 @@
+# Git - prevent nested repositories
+**/.git
+!.git/
+
 # Python
 __pycache__/
 *.py[cod]
