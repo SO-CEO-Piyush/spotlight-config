@@ -2,11 +2,10 @@
 
 # Stage 1: Build Frontend
 FROM node:18-alpine AS frontend-build
-WORKDIR /app
-
-# Copy package files
-COPY frontend/package*.json ./frontend/
 WORKDIR /app/frontend
+
+# Copy package files and install dependencies
+COPY frontend/package*.json ./
 RUN npm install --production
 
 # Copy frontend source and build
@@ -15,11 +14,10 @@ RUN npm run build
 
 # Stage 2: Setup Backend
 FROM node:18-alpine AS backend-build
-WORKDIR /app
-
-# Copy package files
-COPY backend/package*.json ./backend/
 WORKDIR /app/backend
+
+# Copy package files and install dependencies
+COPY backend/package*.json ./
 RUN npm install --production
 
 # Copy backend source
