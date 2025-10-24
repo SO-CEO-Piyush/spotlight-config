@@ -5,8 +5,8 @@ FROM node:18-alpine as frontend-build
 WORKDIR /app/frontend
 
 # Copy frontend dependencies
-COPY frontend/package*.json ./
-RUN npm ci --only=production
+COPY frontend/package.json ./
+RUN npm install --production
 
 # Copy frontend source and build
 COPY frontend/ ./
@@ -17,8 +17,8 @@ FROM node:18-alpine as backend-build
 WORKDIR /app/backend
 
 # Copy backend dependencies
-COPY backend/package*.json ./
-RUN npm ci --only=production
+COPY backend/package.json ./
+RUN npm install --production
 
 # Copy backend source
 COPY backend/ ./
