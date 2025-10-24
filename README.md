@@ -167,4 +167,4 @@ docker build -t media-pipeline .
 docker run -p 5000:5000 media-pipeline
 ```
 
-In production, the React frontend is served by the Express backend at http://localhost:5000
+In production, the React frontend is served by the Express backend at http://localhost:5000# spotlight-config
