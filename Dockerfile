@@ -1,11 +1,12 @@
 # Multi-stage build for CEO's Scenes Media Pipeline
 
 # Stage 1: Build Frontend
-FROM node:18-alpine as frontend-build
-WORKDIR /app/frontend
+FROM node:18-alpine AS frontend-build
+WORKDIR /app
 
-# Copy frontend dependencies
-COPY frontend/package.json ./
+# Copy package files
+COPY frontend/package*.json ./frontend/
+WORKDIR /app/frontend
 RUN npm install --production
 
 # Copy frontend source and build
@@ -13,11 +14,12 @@ COPY frontend/ ./
 RUN npm run build
 
 # Stage 2: Setup Backend
-FROM node:18-alpine as backend-build
-WORKDIR /app/backend
+FROM node:18-alpine AS backend-build
+WORKDIR /app
 
-# Copy backend dependencies
-COPY backend/package.json ./
+# Copy package files
+COPY backend/package*.json ./backend/
+WORKDIR /app/backend
 RUN npm install --production
 
 # Copy backend source
@@ -26,7 +28,7 @@ COPY backend/ ./
 # Stage 3: Production Runtime with Python and FFmpeg
 FROM python:3.11-slim
 
-# Install Node.js, FFmpeg, and system dependencies
+# Install Node.js, npm, FFmpeg, and curl
 RUN apt-get update && apt-get install -y \
     nodejs \
     npm \
@@ -36,18 +38,20 @@ RUN apt-get update && apt-get install -y \
 
 WORKDIR /app
 
-# Copy Python scripts and requirements
+# Copy Python requirements and install dependencies
 COPY requirements.txt ./
-COPY download.py image.py video.py ./
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Copy backend from build stage
+# Copy Python scripts
+COPY download.py image.py video.py ./
+
+# Copy backend with node_modules from build stage
 COPY --from=backend-build /app/backend ./backend
 
 # Copy frontend build from build stage
 COPY --from=frontend-build /app/frontend/build ./frontend/build
 
-# Create necessary directories
+# Create necessary directories for media files
 RUN mkdir -p input_images input_videos output_images output_videos downloaded_images downloaded_videos
 
 # Set environment variables

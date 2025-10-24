@@ -1,21 +1,16 @@
-# Node
+# Node modules (will be reinstalled)
 node_modules/
+*/node_modules/
 npm-debug.log*
-frontend/node_modules/
-backend/node_modules/
 
-# Python
+# Python cache
 __pycache__/
 *.py[cod]
-*$py.class
-*.so
 venv/
 env/
 
 # Build outputs (will be rebuilt)
 frontend/build/
-frontend/.pnp
-frontend/.pnp.js
 
 # Git
 .git/
@@ -29,26 +24,19 @@ frontend/.pnp.js
 
 # OS
 .DS_Store
-*.DS_Store
 Thumbs.db
-
-# Documentation
-DEPLOYMENT.md
-README.md
-ARCHITECTURE.md
-PRD.md
 
 # Logs
 *.log
 
-# Downloaded/processed media (not needed in image)
+# Test and coverage
+coverage/
+.nyc_output/
+
+# Downloaded/processed media (too large for Docker image)
 downloaded_images/
 downloaded_videos/
+input_images/
+input_videos/
 output_images/
 output_videos/
-
-# Docker
-docker-compose.yml
-Dockerfile
-.dockerignore
-
